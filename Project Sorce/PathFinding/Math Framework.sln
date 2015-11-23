@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathLib", "MathLib\Math Framework.vcxproj", "{FC019748-E6D5-4E18-BE44-927E3D96255C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Path Finding", "Path Finding\TinyTanks.vcxproj", "{32F23DE2-5BA3-4B16-AB33-2096391E3448}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FC019748-E6D5-4E18-BE44-927E3D96255C} = {FC019748-E6D5-4E18-BE44-927E3D96255C}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC019748-E6D5-4E18-BE44-927E3D96255C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FC019748-E6D5-4E18-BE44-927E3D96255C}.Debug|Win32.Build.0 = Debug|Win32
+		{FC019748-E6D5-4E18-BE44-927E3D96255C}.Release|Win32.ActiveCfg = Release|Win32
+		{FC019748-E6D5-4E18-BE44-927E3D96255C}.Release|Win32.Build.0 = Release|Win32
+		{32F23DE2-5BA3-4B16-AB33-2096391E3448}.Debug|Win32.ActiveCfg = Debug|Win32
+		{32F23DE2-5BA3-4B16-AB33-2096391E3448}.Debug|Win32.Build.0 = Debug|Win32
+		{32F23DE2-5BA3-4B16-AB33-2096391E3448}.Release|Win32.ActiveCfg = Release|Win32
+		{32F23DE2-5BA3-4B16-AB33-2096391E3448}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
