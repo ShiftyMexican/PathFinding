@@ -112,9 +112,10 @@ void RandomGenState::Update( float deltaTime )
 			m_possibleEnds.clear();
 
 			for(int i = 0; i != m_tiles.size(); i++)
-				{
-					m_tiles[i]->ChangeColour(1.0f, 1.0f, 1.0f);
-				}
+			{
+				m_tiles[i]->ChangeColour(1.0f, 1.0f, 1.0f);
+			}
+
 			PopulateDijkstras();
 
 			m_end = (*itr);
