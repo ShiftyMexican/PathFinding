@@ -57,3 +57,8 @@ void SpriteBatch::DrawLine(Vec2 _point1, Vec2 _point2, float _r, float _g, float
 {
 
 }
+
+void SpriteBatch::DrawSprite(Texture *texture, const Mat3 &transform, const Vec2 &size, float red, float green, float blue, float alpha)
+{
+
+}

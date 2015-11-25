@@ -43,7 +43,7 @@ public:
 	virtual void DrawSprite( Texture *texture, float xPos, float yPos ){ assert(false && "your sprite batch has not overloaded \"DrawSprite( Texture *texture, float xPos, float yPos )\""); }
 	virtual void DrawSprite( Texture *texture, float xPos, float yPos, float width, float height ) {assert(false && "your sprite batch has not overloaded \"DrawSprite( Texture *texture, float xPos, float yPos, float width, float height )\"");}
 	virtual void DrawSprite( Texture *texture, const Mat3 &transform, const Vec2 &size){assert(false && "your sprite batch has not overloaded \"DrawSprite( Texture *texture, const Mat3 &transform, const Vec2 &size)\"");}
-	virtual void DrawSprite( Texture *texture, const Mat3 &transform, const Vec2 &size, float red, float green, float blue, float alpha) {};
+	virtual void DrawSprite( Texture *texture, const Mat3 &transform, const Vec2 &size, float red, float green, float blue, float alpha);
 	virtual void DrawSprite( StaticSprite* sprite ){assert(false && "your sprite batch has not overloaded \"DrawSprite( StaticSprite* sprite )\"");}
 
 	virtual void DrawLine(Vec2 _point1, Vec2 _point2, float _r, float _g, float _b);

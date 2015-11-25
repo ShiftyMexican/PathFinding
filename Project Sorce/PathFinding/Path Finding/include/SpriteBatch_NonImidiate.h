@@ -7,7 +7,7 @@
 #include "SpriteBatch.h"
 #include "Game.h"
 #include "MathLib.h"
-#include "GLEW\GL\glew.h"
+#include "GLEW\glew.h"
 #include "GLFW\glfw3.h"
 
 class SpriteBatch_NonImidiate : public SpriteBatch

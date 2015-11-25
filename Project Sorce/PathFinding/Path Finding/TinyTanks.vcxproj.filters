@@ -57,6 +57,9 @@
     <ClCompile Include="source\PhysicsObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\GLHelpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game.h">
@@ -99,6 +102,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\PhysicsObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLHelpers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

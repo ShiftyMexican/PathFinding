@@ -234,7 +234,7 @@ void SpriteBatch_NonImidiate::DrawSprite( Texture *texture, const Mat3 &transfor
 	BuildOrthoProjectionMatrix( ortho, 0, (float)m_pGame->GetWindowWidth(), (float)m_pGame->GetWindowHeight(), 0, 0, 100);
 	
 	glEnable(GL_BLEND);
-	glUseProgram( m_shader );
+	glUseProgram( m_shader);
 
 	// tell the shader about the texture... 
 	glActiveTexture(GL_TEXTURE0);
@@ -401,8 +401,6 @@ GLuint SpriteBatch_NonImidiate::CreateShader(GLenum a_eShaderType, const char *a
 
 void SpriteBatch_NonImidiate::DrawLine(Vec2 _point1, Vec2 _point2, float _r, float _g, float _b)
 {
-
-	
 	float ortho[16];
 	BuildOrthoProjectionMatrix( ortho, 0, (float)m_pGame->GetWindowWidth(), (float)m_pGame->GetWindowHeight(), 0, 0, 100);
 	
