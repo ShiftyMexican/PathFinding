@@ -23,13 +23,13 @@ MenuState::~MenuState()
 void MenuState::Load()
 {
 	/// Title
-	m_titleTexture = new Texture("Title for pathfinding game.png");
+	m_titleTexture = new Texture("Title for pathfinding game2.png");
 	m_title = new StaticSprite(m_titleTexture);
 	m_title->m_position = Vec2(m_pGame->GetWindowWidth() / 2.0f, m_pGame->GetWindowHeight() / 4.4f);
 	m_title->Update(0);
 
 	/// Random Generation button
-	m_randomGenTexture = new Texture("Random gen button.png");
+	m_randomGenTexture = new Texture("Random gen button2.png");
 	m_randomGen = new StaticSprite(m_randomGenTexture);
 	m_randomGen->m_position = Vec2(m_pGame->GetWindowWidth() / 2.0f, m_pGame->GetWindowHeight() / 1.9f);
 	m_randomGen->Update(0);

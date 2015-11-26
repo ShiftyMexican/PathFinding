@@ -33,7 +33,7 @@ void Tile::Update( float dt )
 /// Draw
 void Tile::Draw( SpriteBatch * sb)
 {
-	sb->DrawSprite( m_tileTexture, m_localTransform, Vec2(20, 20), m_red, m_green, m_blue, m_alpha);
+	sb->DrawSprite( m_tileTexture, m_localTransform, Vec2(25, 25), m_red, m_green, m_blue, m_alpha);
 }
 
 void Tile::BFS()

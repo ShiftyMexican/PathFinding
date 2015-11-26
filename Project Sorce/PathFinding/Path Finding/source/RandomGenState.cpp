@@ -78,7 +78,6 @@ void RandomGenState::Update( float deltaTime )
 	if( glfwGetMouseButton(m_pGame->GetWindow(), GLFW_MOUSE_BUTTON_RIGHT))
 	{
 		m_rightClicked = true;
-		//m_newRightClick = true;
 	}
 	else
 		m_rightClicked = false;
@@ -94,6 +93,8 @@ void RandomGenState::Update( float deltaTime )
 		(*itr)->Update( deltaTime );
 	}
 
+	
+
 	/// Code for clicking on tiles to create start points----------------------
 	for(auto itr = m_tiles.begin(); itr < m_tiles.end(); itr++)
 	{
@@ -106,32 +107,35 @@ void RandomGenState::Update( float deltaTime )
 			(*itr)->m_pressed = false;
 		}
 
-		if((*itr)->m_pressed == true && m_rightClicked == true && m_coolDown < 0.0f)
+		if ((*itr)->m_pressed == true && m_rightClicked == true && m_coolDown < 0.0f)
 		{
-			dijksraPoints.clear();
-			m_possibleEnds.clear();
-
-			for(int i = 0; i != m_tiles.size(); i++)
+			if (m_end == nullptr || (m_end->GetId() != (*itr)->GetId()))
 			{
-				m_tiles[i]->ChangeColour(1.0f, 1.0f, 1.0f);
+				dijksraPoints.clear();
+				m_possibleEnds.clear();
+
+				for (int i = 0; i != m_tiles.size(); i++)
+				{
+					m_tiles[i]->ChangeColour(1.0f, 1.0f, 1.0f);
+				}
+
+				PopulateDijkstras();
+
+				m_end = (*itr);
+				m_possibleEnds.push_back((*itr));
+				(*itr)->ChangeColour(0.0f, 1.0f, 1.0f);
+				std::cout << "End Node Is: " << (*itr)->GetId() << std::endl;
+				m_howManyEndTiles += 1;
+				m_endSelected = true;
+				m_coolDown = 0.2f;
+				outPath.clear();
+				m_dijkstrasDone = false;
+				m_endFound = false;
+				SetNewStart();
+				AStarPath(m_start, m_end, outPath);
+				m_aStarSearch = true;
+
 			}
-
-			PopulateDijkstras();
-
-			m_end = (*itr);
-			m_possibleEnds.push_back( (*itr) );
-			(*itr)->ChangeColour(0.0f, 1.0f, 1.0f);
-			std::cout << "End Node Is: " << (*itr)->GetId() << std::endl;
-			m_howManyEndTiles += 1;
-			m_endSelected  = true;
-			m_coolDown = 0.2f;
-			outPath.clear();
-			m_dijkstrasDone = false;
-			m_endFound = false;
-			SetNewStart();
-			AStarPath(m_start, m_end, outPath );
-			m_aStarSearch = true;
-
 		}
 	}
 	
@@ -177,7 +181,7 @@ void RandomGenState::Update( float deltaTime )
 			if(m_dijkstrasDone == false)
 			{
 				SetNewStart();
-				Dijkstraspath(m_start, outPath );
+				Dijkstraspath(m_start, outPath);
 				m_aStarSearch = true;
 				m_endFound = false;
 				m_dijkstrasDone = true;
@@ -504,16 +508,16 @@ void RandomGenState::AStarPath( Tile* start, Tile* end, std::vector< Tile* > &ou
 		//-----------------------------------------------------------------
 
 		/// Processing of Current nodes.
-		for(auto itr = currentTile->m_neighbours.begin(); itr != currentTile->m_neighbours.end(); itr++)
+		for (auto itr = currentTile->m_neighbours.begin(); itr != currentTile->m_neighbours.end(); itr++)
 		{
 			bool canAddNode = true;
 
-			float distanceBetweenTiles	=  Vec2(currentTile->Transform()->GetTranslation().x - (*itr)->Transform()->GetTranslation().x, 
-												currentTile->Transform()->GetTranslation().y - (*itr)->Transform()->GetTranslation().y).Len();
+			float distanceBetweenTiles = Vec2(currentTile->Transform()->GetTranslation().x - (*itr)->Transform()->GetTranslation().x,
+				currentTile->Transform()->GetTranslation().y - (*itr)->Transform()->GetTranslation().y).Len();
 
 			/// Calculations for H Score
-			float heuristic				= Vec2(currentTile->Transform()->GetTranslation().x - end->Transform()->GetTranslation().x, 
-											   currentTile->Transform()->GetTranslation().y - end->Transform()->GetTranslation().y).Len();
+			float heuristic = Vec2(currentTile->Transform()->GetTranslation().x - end->Transform()->GetTranslation().x,
+				currentTile->Transform()->GetTranslation().y - end->Transform()->GetTranslation().y).Len();
 
 			heuristic = heuristic * heuristic;
 
@@ -521,9 +525,9 @@ void RandomGenState::AStarPath( Tile* start, Tile* end, std::vector< Tile* > &ou
 			float tempHeuristic = tempGValue + heuristic;
 
 			///Checking for node on closed list
-			for(auto iter2 = m_closedList.begin(); iter2 != m_closedList.end(); iter2++)
+			for (auto iter2 = m_closedList.begin(); iter2 != m_closedList.end(); iter2++)
 			{
-				if( (*itr) == (*iter2))
+				if ((*itr) == (*iter2))
 				{
 					canAddNode = false;
 					break;
@@ -531,27 +535,25 @@ void RandomGenState::AStarPath( Tile* start, Tile* end, std::vector< Tile* > &ou
 			}
 
 			///Checking for node on open list
-			for(auto iter2 = m_priorityList.begin(); iter2 != m_priorityList.end(); iter2++)
+			for (auto iter2 = m_priorityList.begin(); iter2 != m_priorityList.end(); iter2++)
 			{
-				if( (*itr) == (*iter2))
+				if ((*itr) == (*iter2))
 				{
 					canAddNode = false;
 					break;
 				}
 			}
 
-			if( canAddNode )
+			if (canAddNode)
 			{
 				m_priorityList.push_back((*itr));
-				(*itr)->SetGScore( tempGValue );
-				(*itr)->SetHScore( heuristic );
-				(*itr)->SetFScore( tempGValue + heuristic );
-				(*itr)->SetParent( currentTile );
+				(*itr)->SetGScore(tempGValue);
+				(*itr)->SetHScore(heuristic);
+				(*itr)->SetFScore(tempGValue + heuristic);
+				(*itr)->SetParent(currentTile);
 			}
-			
-		}
 
-	    //currentTile->m_active = true;
+		}
 
 		m_priorityList.sort( [](Tile* const a, Tile* const b)
 		{
@@ -567,12 +569,6 @@ void RandomGenState::AStarPath( Tile* start, Tile* end, std::vector< Tile* > &ou
 
 void RandomGenState::ResetState()
 {
-	//for(auto itr = m_tiles.begin(); itr < m_tiles.end(); itr++)
-	//	{
-	//		(*itr)->m_neighbours.clear();
-	//		m_tilesOnScreen = false;
-	//	}
-	//	m_tiles.clear();
 		m_howManyTiles = 0;
 		outPath.clear();
 		m_howManyEndTiles = 0;
